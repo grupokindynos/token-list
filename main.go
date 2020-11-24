@@ -56,7 +56,7 @@ func GetApp() *gin.Engine {
 func ApplyRoutes(r *gin.Engine) {
 	api := r.Group("/")
 	{
-		api.GET("list", list)
+		api.GET("", list)
 	}
 	r.NoRoute(func(c *gin.Context) {
 		c.String(http.StatusNotFound, "Not Found")
