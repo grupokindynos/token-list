@@ -1,6 +1,11 @@
-package cmd
+package main
 
-import "time"
+import (
+	"encoding/json"
+	"io/ioutil"
+	"time"
+)
+
 
 type ListVersion struct {
 	Major int `json:"major"`
@@ -43,5 +48,17 @@ var ListData = List{
 			Tags: []string{"polis", "erc20", "defi"},
 		},
 	},
-	Version: ListVersion{Major: 1, Minor: 0, Patch: 0},
+	Version: ListVersion{Major: 1, Minor: 0, Patch: 1},
+}
+
+
+func main() {
+	raw, err := json.Marshal(ListData)
+	if err != nil {
+		panic(err)
+	}
+	err = ioutil.WriteFile("./kindynos.tokens.json", raw, 0700)
+	if err != nil {
+		panic(err)
+	}
 }
